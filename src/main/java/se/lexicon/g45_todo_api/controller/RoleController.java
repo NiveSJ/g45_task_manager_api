@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.g45_todo_api.model.dto.TodoDto;
-import se.lexicon.g45_todo_api.service.RoleService;
+import se.lexicon.g45_todo_api.service.TodoService;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class RoleController {
 
     @Autowired
-    RoleService roleService;
+    TodoService roleService;
 
 
     // http://localhost:8080/api/v1/role/
