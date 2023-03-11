@@ -1,10 +1,14 @@
-# Spring Boot REST
+# Task Manager REST API
 
--  [x] Spring Boot REST
--  [x] Spring Data Jpa
--  [x] ORM
--  [x] Spring DOC UI
+Task Manager API to manage todo list.
 
--  [ ] Exception Handling
--  [ ] Request Validation
--  [ ] Spring Security(Optional)
+Concepts used:
+
+## Spring Boot
+## Mysql
+## Spring data JPA
+## Spring docs
+## Spring Validation
+## DTO model
+## Model Mapper
+## REST API
