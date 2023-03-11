@@ -5,10 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.g45_todo_api.model.dto.RoleDto;
-import se.lexicon.g45_todo_api.model.entity.Role;
 import se.lexicon.g45_todo_api.service.RoleService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

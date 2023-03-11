@@ -6,12 +6,11 @@ import org.springframework.stereotype.Service;
 import se.lexicon.g45_todo_api.exception.DataDuplicateException;
 import se.lexicon.g45_todo_api.exception.DataNotFoundException;
 import se.lexicon.g45_todo_api.model.dto.RoleDto;
-import se.lexicon.g45_todo_api.model.entity.Role;
-import se.lexicon.g45_todo_api.repository.RoleRepository;
+import se.lexicon.g45_todo_api.model.entity.Todo;
+import se.lexicon.g45_todo_api.repository.TodoRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 // import the model mapper class
 import org.modelmapper.ModelMapper;
@@ -20,14 +19,14 @@ import org.modelmapper.ModelMapper;
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
-    RoleRepository roleRepository;
+    TodoRepository roleRepository;
     @Autowired
     ModelMapper modelMapper;
 
 
     @Override
     public List<RoleDto> getAll() {
-        List<Role> roleList = roleRepository.findAllByOrderByIdDesc();
+        List<Todo> roleList = roleRepository.findAllByOrderByIdDesc();
         /*return roleList.stream()
                 .map(role -> new RoleDto(role.getId(), role.getName()))
                 .collect(Collectors.toList());*/
@@ -39,9 +38,9 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public RoleDto findById(Integer roleId) {
         if (roleId == null) throw new IllegalArgumentException("role id was null");
-        Optional<Role> optionalRole = roleRepository.findById(roleId);
+        Optional<Todo> optionalRole = roleRepository.findById(roleId);
         if (optionalRole.isPresent()) {
-            Role entity = optionalRole.get();
+            Todo entity = optionalRole.get();
             return modelMapper.map(entity, RoleDto.class);
         }
         return null;
@@ -52,7 +51,7 @@ public class RoleServiceImpl implements RoleService {
         if (roleDto == null) throw new IllegalArgumentException("role data was null");
         if (roleDto.getId() != 0) throw new IllegalArgumentException("role id should be null or zero");
 
-        Role createdEntity = roleRepository.save(modelMapper.map(roleDto, Role.class));
+        Todo createdEntity = roleRepository.save(modelMapper.map(roleDto, Todo.class));
         return modelMapper.map(createdEntity, RoleDto.class);
     }
 
@@ -66,7 +65,7 @@ public class RoleServiceImpl implements RoleService {
 
         if (roleRepository.findByName(roleDto.getName()).isPresent())
             throw new DataDuplicateException("duplicate error");
-        roleRepository.save(modelMapper.map(roleDto, Role.class));
+        roleRepository.save(modelMapper.map(roleDto, Todo.class));
 
     }
 

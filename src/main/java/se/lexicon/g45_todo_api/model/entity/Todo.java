@@ -5,22 +5,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
-
 @Entity
-@Table(name = "roles")
-public class Role {
+
+public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private int id;
-    @Column(unique = true, nullable = false)
-    private String name;
 
-    public Role(String name) {
-        this.name = name;
+    private String title;
+    private String Description;
+    private LocalDate deadline;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User Assignee;
+
+    public Todo() {
     }
 }

@@ -8,11 +8,13 @@ import se.lexicon.g45_todo_api.exception.DataDuplicateException;
 import se.lexicon.g45_todo_api.exception.DataNotFoundException;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Data
 
 @Entity
@@ -20,35 +22,30 @@ import java.util.Set;
 public class User {
     @Id
     @Column(updatable = false)
-    private String username;
+    private int id;
+    private String firstName;
     @Column(nullable = false)
-    private String password;
-    private boolean expired;
+    private String lastname;
+    @Column(unique = true,updatable = false)
+    private String email;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinTable(name = "users_roles",
-            joinColumns = {@JoinColumn(name = "USERNAME")},
-            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID")}
-    )
-    private Set<Role> roles = new HashSet<>();
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH} ,mappedBy = "Assignee")
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    private List<Todo> todoList = new ArrayList<>();
+
+    public User() {
     }
 
-    public void addRole(Role role) {
-        if (roles.contains(role)) {
-            throw new DataDuplicateException("duplicate error");
-        }
-        roles.add(role);
+    public void addTodoList(Todo todo) {
+
+        if(todo== null) throw new IllegalArgumentException(">> From User Entity: Todo cannot be empty");
+        todoList.add(todo);
+        todo.setAssignee(this);  // Two way mapping
     }
 
-    public void removeRole(Role role) {
-        if (!roles.contains(role)) {
-            throw new DataNotFoundException("not found error");
-        }
-        roles.remove(role);
+    public void removeTodoList(Todo role) {
+
+        todoList.remove(role);
     }
 
 
