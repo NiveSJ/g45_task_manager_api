@@ -44,7 +44,6 @@ public class TodoServiceImpl implements TodoService {
         return modelMapper.map(todos, new TypeToken<List<TodoDto>>() {
         }.getType());
 
-
     }
 
     @Override
@@ -62,7 +61,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public TodoDto create(TodoDto todoDto) {
         if (todoDto == null) throw new IllegalArgumentException(">> From Todo service layer :todo data was null");
-        if (todoDto.getId() != 0) throw new IllegalArgumentException("todo id should be null or zero");
+        if (todoDto.getId() != 0) throw new IllegalArgumentException(">> From Todo service layer :todo id should be null or zero");
         Todo createdEntity = todoRepository.save(modelMapper.map(todoDto, Todo.class));
         return modelMapper.map(createdEntity, TodoDto.class);
     }
