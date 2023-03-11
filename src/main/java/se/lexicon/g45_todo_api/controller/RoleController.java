@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.lexicon.g45_todo_api.model.dto.RoleDto;
+import se.lexicon.g45_todo_api.model.dto.TodoDto;
 import se.lexicon.g45_todo_api.service.RoleService;
 
 import java.util.List;
@@ -19,13 +19,13 @@ public class RoleController {
 
     // http://localhost:8080/api/v1/role/
     @GetMapping("/")
-    public ResponseEntity<List<RoleDto>> getAll() {
+    public ResponseEntity<List<TodoDto>> getAll() {
         //return ResponseEntity.ok(roleService.getAll()); // 200
         return ResponseEntity.status(HttpStatus.OK).body(roleService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RoleDto> findById(@PathVariable("id") Integer id) {
+    public ResponseEntity<TodoDto> findById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(roleService.findById(id));
     }
 
@@ -37,14 +37,14 @@ public class RoleController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<RoleDto> create(@RequestBody RoleDto dto){
-        RoleDto createdROleDto = roleService.create(dto);
+    public ResponseEntity<TodoDto> create(@RequestBody TodoDto dto){
+        TodoDto createdROleDto = roleService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdROleDto); // 201
     }
 
 
     @PutMapping("/")
-    public ResponseEntity<Void> update(@RequestBody RoleDto dto){
+    public ResponseEntity<Void> update(@RequestBody TodoDto dto){
         roleService.update(dto);
         return ResponseEntity.noContent().build();
     }

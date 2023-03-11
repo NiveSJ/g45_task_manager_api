@@ -14,9 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
-
 @Data
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -40,12 +38,14 @@ public class User {
 
         if(todo== null) throw new IllegalArgumentException(">> From User Entity: Todo cannot be empty");
         todoList.add(todo);
-        todo.setAssignee(this);  // Two way mapping
+        todo.setAssignee(this);  // Two-way mapping
     }
 
-    public void removeTodoList(Todo role) {
-
-        todoList.remove(role);
+    public void removeTodoList(Todo todo) {
+        if(todo== null) throw new IllegalArgumentException(">> From User Entity: Todo cannot be empty while removing");
+        if(todoList!=null){
+            todo.setAssignee(null);
+            todoList.remove(todo);}
     }
 
 

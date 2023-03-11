@@ -1,18 +1,18 @@
 package se.lexicon.g45_todo_api.service;
 
-import se.lexicon.g45_todo_api.model.dto.RoleDto;
+import se.lexicon.g45_todo_api.model.dto.TodoDto;
 
 import java.util.List;
 
 public interface RoleService {
 
-    List<RoleDto> getAll();
+    List<TodoDto> getAll();
 
-    RoleDto findById(Integer roleId);
+    TodoDto findById(Integer roleId);
 
-    RoleDto create(RoleDto roleDto);
+    TodoDto create(TodoDto roleDto);
 
-    void update(RoleDto roleDto);
+    void update(TodoDto roleDto);
 
     void delete(Integer roleId);
 

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.lexicon.g45_todo_api.exception.DataDuplicateException;
 import se.lexicon.g45_todo_api.exception.DataNotFoundException;
-import se.lexicon.g45_todo_api.model.dto.RoleDto;
+import se.lexicon.g45_todo_api.model.dto.TodoDto;
 import se.lexicon.g45_todo_api.model.entity.Todo;
 import se.lexicon.g45_todo_api.repository.TodoRepository;
 
@@ -25,38 +25,38 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public List<RoleDto> getAll() {
+    public List<TodoDto> getAll() {
         List<Todo> roleList = roleRepository.findAllByOrderByIdDesc();
         /*return roleList.stream()
                 .map(role -> new RoleDto(role.getId(), role.getName()))
                 .collect(Collectors.toList());*/
 
-        return modelMapper.map(roleList, new TypeToken<List<RoleDto>>() {
+        return modelMapper.map(roleList, new TypeToken<List<TodoDto>>() {
         }.getType());
     }
 
     @Override
-    public RoleDto findById(Integer roleId) {
+    public TodoDto findById(Integer roleId) {
         if (roleId == null) throw new IllegalArgumentException("role id was null");
         Optional<Todo> optionalRole = roleRepository.findById(roleId);
         if (optionalRole.isPresent()) {
             Todo entity = optionalRole.get();
-            return modelMapper.map(entity, RoleDto.class);
+            return modelMapper.map(entity, TodoDto.class);
         }
         return null;
     }
 
     @Override
-    public RoleDto create(RoleDto roleDto) {
+    public TodoDto create(TodoDto roleDto) {
         if (roleDto == null) throw new IllegalArgumentException("role data was null");
         if (roleDto.getId() != 0) throw new IllegalArgumentException("role id should be null or zero");
 
         Todo createdEntity = roleRepository.save(modelMapper.map(roleDto, Todo.class));
-        return modelMapper.map(createdEntity, RoleDto.class);
+        return modelMapper.map(createdEntity, TodoDto.class);
     }
 
     @Override
-    public void update(RoleDto roleDto) {
+    public void update(TodoDto roleDto) {
         if (roleDto == null) throw new IllegalArgumentException("role data was null");
         if (roleDto.getId() == 0) throw new IllegalArgumentException("role id should not be zero");
 
@@ -72,7 +72,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void delete(Integer roleId) {
 
-        RoleDto roleDto = findById(roleId);
+        TodoDto roleDto = findById(roleId);
         if (roleDto == null) throw new DataNotFoundException("id was not valid");
         roleRepository.deleteById(roleId);
     }
