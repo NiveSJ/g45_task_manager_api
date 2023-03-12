@@ -9,6 +9,7 @@ import se.lexicon.g45_todo_api.service.UserService;
 
 import java.util.List;
 @RestController
+//@CrossOrigin
 @RequestMapping("/api/v1/user")
 public class UserController {
     @Autowired
