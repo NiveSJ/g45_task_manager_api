@@ -70,7 +70,7 @@ public class TodoServiceImpl implements TodoService {
     public void update(TodoDto todoDto) {
         if (todoDto == null) throw new IllegalArgumentException(">> From Todo service layer :todo data was null");
         if (todoDto.getId() == 0)
-            throw new IllegalArgumentException(">> From Todo service layer :role id should not be zero");
+            throw new IllegalArgumentException(">> From Todo service layer :todo id should not be zero");
 
         if (!todoRepository.findById(todoDto.getId()).isPresent())
             throw new DataNotFoundException(">> From Todo service layer :data not found error");
@@ -79,11 +79,12 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public void delete(Integer roleId) {
+    public void delete(Integer todoId) {
+        if(todoId == null) throw new IllegalArgumentException(">> From Todo service layer :todo Id cannot be null");
 
-        TodoDto roleDto = findById(roleId);
-        if (roleDto == null) throw new DataNotFoundException(">> From Todo service layer :id was not valid");
-        todoRepository.deleteById(roleId);
+        TodoDto todoDtoDto = findById(todoId);
+        if (todoDtoDto == null) throw new DataNotFoundException(">> From Todo service layer :id was not valid");
+        todoRepository.deleteById(todoId);
     }
 
 
