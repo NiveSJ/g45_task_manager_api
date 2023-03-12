@@ -23,44 +23,35 @@ public class TodoController {
         //return ResponseEntity.ok(roleService.getAll()); // 200
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getAll());
     }
-
     @GetMapping("/user/{email}")
     public ResponseEntity<List<TodoDto>> getAllByUser(@PathVariable("email") String email) {
         //return ResponseEntity.ok(roleService.getAll()); // 200
         return ResponseEntity.status(HttpStatus.OK).body(todoService.findByUser(email));
     }
-
-    @GetMapping("/user/{email}")
+    @GetMapping("/user/{title}")
     public ResponseEntity<List<TodoDto>> getAllByTitle(@PathVariable("title") String title) {
         //return ResponseEntity.ok(roleService.getAll()); // 200
         return ResponseEntity.status(HttpStatus.OK).body(todoService.findByUser(title));
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> findById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(todoService.findById(id));
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable("id") Integer id){
         todoService.delete(id);
         //return ResponseEntity.noContent().build(); // 204
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
     @PostMapping("/")
     public ResponseEntity<TodoDto> create(@RequestBody TodoDto dto){
-        TodoDto createdROleDto = todoService.create(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdROleDto); // 201
+        TodoDto createdTodoDto = todoService.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTodoDto); // 201
     }
-
-
     @PutMapping("/")
     public ResponseEntity<Void> update(@RequestBody TodoDto dto){
         todoService.update(dto);
         return ResponseEntity.noContent().build();
     }
-
-
 }
 

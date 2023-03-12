@@ -3,10 +3,9 @@ import se.lexicon.g45_todo_api.model.dto.UserDto;
 
 import java.util.List;
 
-interface   UserService {
+public interface   UserService {
     List<UserDto> getAll();
-
-
+    UserDto  getAllByEmail(String email);
     UserDto findById(Integer userId);
 
     UserDto create(UserDto userDto);
