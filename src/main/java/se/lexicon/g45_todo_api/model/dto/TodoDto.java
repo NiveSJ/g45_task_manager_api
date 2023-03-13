@@ -13,15 +13,10 @@ import java.time.LocalDate;
 @ToString
 
 public class TodoDto {
-
-
     private int id;
-
     private String title;
     private String Description;
     private String status;
     private LocalDate deadline;
-
-
 
 }
