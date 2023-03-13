@@ -20,7 +20,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAll());
     }
 
-    @GetMapping("/user/{email}")
+    @GetMapping("/{email}")
     public ResponseEntity<UserDto> getAllByEmail(@PathVariable("email") String email) {
 
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAllByEmail(email));

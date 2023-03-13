@@ -19,8 +19,9 @@ public class TodoDto {
 
     private String title;
     private String Description;
+    private String status;
     private LocalDate deadline;
 
-    private User Assignee;
+
 
 }

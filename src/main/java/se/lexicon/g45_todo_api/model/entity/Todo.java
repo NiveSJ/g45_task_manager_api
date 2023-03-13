@@ -20,9 +20,7 @@ public class Todo {
     private String title;
     private String Description;
     private LocalDate deadline;
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User Assignee;
+    private String status;
 
     public Todo() {
     }

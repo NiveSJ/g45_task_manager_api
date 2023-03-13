@@ -23,15 +23,11 @@ public class TodoController {
         //return ResponseEntity.ok(roleService.getAll()); // 200
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getAll());
     }
-    @GetMapping("/user/{email}")
-    public ResponseEntity<List<TodoDto>> getAllByUser(@PathVariable("email") String email) {
-        //return ResponseEntity.ok(roleService.getAll()); // 200
-        return ResponseEntity.status(HttpStatus.OK).body(todoService.findByUser(email));
-    }
+
     @GetMapping("/user/{title}")
     public ResponseEntity<List<TodoDto>> getAllByTitle(@PathVariable("title") String title) {
         //return ResponseEntity.ok(roleService.getAll()); // 200
-        return ResponseEntity.status(HttpStatus.OK).body(todoService.findByUser(title));
+        return ResponseEntity.status(HttpStatus.OK).body(todoService.findByTitle(title));
     }
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> findById(@PathVariable("id") Integer id) {

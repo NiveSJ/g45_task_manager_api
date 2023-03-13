@@ -3,10 +3,13 @@ package se.lexicon.g45_todo_api.service;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.g45_todo_api.exception.DataDuplicateException;
 import se.lexicon.g45_todo_api.exception.DataNotFoundException;
 import se.lexicon.g45_todo_api.model.dto.TodoDto;
+import se.lexicon.g45_todo_api.model.dto.UserDto;
 import se.lexicon.g45_todo_api.model.entity.Todo;
+import se.lexicon.g45_todo_api.model.entity.User;
 import se.lexicon.g45_todo_api.repository.TodoRepository;
 
 import java.util.List;
@@ -14,14 +17,19 @@ import java.util.Optional;
 
 // import the model mapper class
 import org.modelmapper.ModelMapper;
+import se.lexicon.g45_todo_api.repository.UserRepository;
 
 @Service
+@Transactional
 public class TodoServiceImpl implements TodoService {
 
     @Autowired
     TodoRepository todoRepository;
+
     @Autowired
     ModelMapper modelMapper;
+    @Autowired
+    UserService userService;
 
 
     @Override
@@ -38,13 +46,6 @@ public class TodoServiceImpl implements TodoService {
         }.getType());
     }
 
-    public List<TodoDto> findByUser(String email) {
-        if (email == null) throw new IllegalArgumentException("From Todo service layer Email cannot be null");
-        List<Todo> todos = todoRepository.findAllByAssignee(email);
-        return modelMapper.map(todos, new TypeToken<List<TodoDto>>() {
-        }.getType());
-
-    }
 
     @Override
     public TodoDto findById(Integer TodoId) {

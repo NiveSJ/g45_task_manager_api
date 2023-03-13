@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto  getAllByEmail(String email) {
-      Optional<User> users = userRepository.findByEmail(email);
+      Optional<User> users = userRepository.findByEmailIgnoreCase(email);
         return modelMapper.map(users, UserDto.class);
     }
 

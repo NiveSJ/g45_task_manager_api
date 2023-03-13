@@ -19,6 +19,7 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private int id;
     private String firstName;
@@ -27,7 +28,7 @@ public class User {
     @Column(unique = true,updatable = false)
     private String email;
 
-    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH} ,mappedBy = "Assignee")
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.PERSIST} )
 
     private List<Todo> todoList = new ArrayList<>();
 
@@ -38,13 +39,13 @@ public class User {
 
         if(todo== null) throw new IllegalArgumentException(">> From User Entity: Todo cannot be empty");
         todoList.add(todo);
-        todo.setAssignee(this);  // Two-way mapping
+       // todo.setAssignee(this);  // Two-way mapping
     }
 
     public void removeTodoList(Todo todo) {
         if(todo== null) throw new IllegalArgumentException(">> From User Entity: Todo cannot be empty while removing");
         if(todoList!=null){
-            todo.setAssignee(null);
+          //  todo.setAssignee(null);
             todoList.remove(todo);}
     }
 

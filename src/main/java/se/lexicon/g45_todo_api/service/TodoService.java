@@ -8,7 +8,7 @@ public interface TodoService {
 
     List<TodoDto> getAll();
     List<TodoDto> findByTitle(String title);
-    List<TodoDto> findByUser(String email);
+
 
     TodoDto findById(Integer TodoId);
 
