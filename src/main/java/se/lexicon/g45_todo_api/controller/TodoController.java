@@ -3,6 +3,7 @@ package se.lexicon.g45_todo_api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.g45_todo_api.model.dto.TodoDto;
 import se.lexicon.g45_todo_api.service.TodoService;
@@ -11,6 +12,7 @@ import java.util.List;
 //@CrossOrigin(origins = "", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1/todo")
+@Validated
 public class TodoController {
 
     @Autowired
