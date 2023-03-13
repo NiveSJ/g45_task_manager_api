@@ -12,12 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class UserDto {
-
     private int id;
     private String firstName;
-
     private String lastname;
-
     private String email;
     private List<Todo> todoList = new ArrayList<>();
 }

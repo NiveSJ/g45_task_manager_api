@@ -16,7 +16,6 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private int id;
-
     private String title;
     private String Description;
     private LocalDate deadline;
