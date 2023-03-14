@@ -36,7 +36,11 @@ public class UserServiceImpl implements UserService {
 
     public UserDto  getAllByEmail(String email) {
       Optional<User> users = userRepository.findByEmailIgnoreCase(email);
-        return modelMapper.map(users, UserDto.class);
+      if(users.isPresent()){
+          User getUser=users.get();
+          return modelMapper.map(getUser, UserDto.class);}
+
+       return null;
     }
 
     @Override
